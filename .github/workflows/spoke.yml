@@ -17,8 +17,19 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Install deps
-        run: yarn install
+      - name: Stop server
+        run: pm2 stop dialog_server
 
-      - name: Build
-        run: yarn build
+      - name: Check version
+        run: |
+          node -v
+          npm -v
+
+      - name: Install dependency
+        run: npm i
+
+      - name: Start server
+        run: pm2 start dialog_server
+
+      - name: Check status
+        run: pm2 status
